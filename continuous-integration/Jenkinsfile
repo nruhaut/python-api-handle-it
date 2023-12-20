@@ -37,17 +37,15 @@ pipeline {
                gradle 'installGradle'
              }
              steps {
-                dir('continuous-integration') {
-                    parallel (
-                 // run Gradle to execute compile and unit testing
-                    pylint: {
+                parallel (
+                // run Gradle to execute compile and unit testing
+                    dir('continuous-integration') {
                         sh 'gradle lint'
                     },
-                    pycode: {
+                    dir('continuous-integration') {
                         sh 'gradle pycode'
                     }
-                )
-                }   
+                )  
              }
            }
 
