@@ -9,7 +9,7 @@ pipeline {
       stages {
         stage('Clone sources') {
             steps {
-                git url: 'https://github.com/vanessakovalsky/python-api-handle-it.git'
+                git url: 'https://github.com/nruhaut/python-api-handle-it.git'
             }
         }
             stage('Security analysis') {
@@ -38,6 +38,9 @@ pipeline {
              }
              steps {
                  parallel (
+                    dir("folder") {
+                        sh "cd continuous-integration"
+                    }
                  // run Gradle to execute compile and unit testing
                     pylint: {
                         sh 'gradle lint'
